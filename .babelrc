@@ -1,0 +1,24 @@
+{
+  "plugins": [],
+  "env": {
+    "development": {
+      "presets": ["flow", "react", ["env", { "targets": { "chrome": 63 } }]]
+    },
+    "test": {
+      "presets": ["flow", "react", ["env", { "targets": { "node": "8.9" } }]]
+    },
+    "production": {
+      "presets": [
+        "flow",
+        "react",
+        [
+          "env",
+          {
+            "modules": false,
+            "browsers": ["last 2 versions", "ie >= 11"]
+          }
+        ]
+      ]
+    }
+  }
+}
