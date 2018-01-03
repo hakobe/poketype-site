@@ -27,4 +27,5 @@ rules:
       argsIgnorePattern: ^_
       varsIgnorePattern: ^_
   react/jsx-uses-vars: 2
+  react/jsx-uses-react: 2
 

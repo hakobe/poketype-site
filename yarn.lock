@@ -4224,6 +4224,13 @@ pluralize@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
 
+pokemon-types@../pokemon-types:
+  version "0.0.1"
+
+"pokemon-types@https://github.com/hakobe/pokemon-types":
+  version "0.0.1"
+  resolved "https://github.com/hakobe/pokemon-types#83272e3119c43257ae8d90df90952b3ec6e1a521"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"

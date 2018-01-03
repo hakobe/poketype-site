@@ -51,6 +51,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "pokemon-types": "https://github.com/hakobe/pokemon-types",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
