@@ -2,41 +2,36 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import poketype from 'pokemon-types'
 
-const PokeTypeButton = props => {
-  const className = props.selection.has(props.type) ? 'selected' : ''
+const PokeTypeButton = ({ selection, typ, onSelect }) => {
+  const className = selection.has(typ) ? 'selected' : ''
   return (
-    <div
-      key={props.type}
-      className={className}
-      onClick={() => props.onSelect(props.type)}
-    >
-      {props.type}
+    <div key={typ} className={className} onClick={() => onSelect(typ)}>
+      {typ}
     </div>
   )
 }
 
-const PokeTypeButtons = props => {
+const PokeTypeButtons = ({ selection, onSelect }) => {
   const buttons = poketype.TypesList.map(typ =>
     PokeTypeButton({
-      type: typ,
-      selection: props.selection,
-      onSelect: props.onSelect
+      typ: typ,
+      selection: selection,
+      onSelect: onSelect
     })
   )
   return <div>{buttons}</div>
 }
 
-const PokemonEffectivness = props => {
-  const ef = props.effectiveness
+const PokemonEffectivness = ({ effectiveness }) => {
   return (
-    <li key={ef.skillType + '-' + ef.value}>
-      {ef.skillType} x{ef.value}
+    <li key={effectiveness.skillType + '-' + effectiveness.value}>
+      {effectiveness.skillType} x{effectiveness.value}
     </li>
   )
 }
 
-const PokemonEffectivenessList = props => {
-  const elems = props.effectivenesses
+const PokemonEffectivenessList = ({ effectivenesses }) => {
+  const elems = effectivenesses
     .filter(ef => ef.value !== 1)
     .map(ef => PokemonEffectivness({ effectiveness: ef }))
   return <ul>{elems}</ul>
