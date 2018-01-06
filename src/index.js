@@ -6,11 +6,18 @@ import { createStore } from 'redux'
 
 // action
 const SELECT_POKE_TYPE = 'SELECT_POKE_TYPE'
+const RESET_POKE_TYPE = 'RESET_POKE_TYPE'
 
 const selectPokeType = typ => {
   return {
     type: SELECT_POKE_TYPE,
     selectedType: typ
+  }
+}
+
+const resetPokeType = () => {
+  return {
+    type: RESET_POKE_TYPE
   }
 }
 
@@ -43,11 +50,27 @@ const SelectablePokeTypeButton = connect(
   mapDispatchToPropsPTB
 )(PokeTypeButton)
 
+const mapDispatchToPropsRB = dispatch => {
+  return {
+    onClick: () => {
+      dispatch(resetPokeType())
+    }
+  }
+}
+
+const ResetButton = connect(null, mapDispatchToPropsRB)(({ onClick }) => (
+  <button onClick={onClick}>Reset</button>
+))
+
 const PokeTypeButtons = () => {
   const buttons = poketype.TypesList.map(typ => (
     <SelectablePokeTypeButton key={typ} typ={typ} />
   ))
-  return <div>{buttons}</div>
+  return (
+    <div>
+      {buttons} <ResetButton />
+    </div>
+  )
 }
 
 const SelectablePokeTypeButtons = connect()(PokeTypeButtons)
@@ -82,9 +105,7 @@ const getNextSelection = (current, typ) => {
   const nextSelection = new Set(current)
   if (nextSelection.has(typ)) {
     nextSelection.delete(typ)
-  } else if (nextSelection.size === 2) {
-    nextSelection.clear()
-  } else {
+  } else if (nextSelection.size < 2) {
     nextSelection.add(typ)
   }
   return nextSelection
@@ -117,6 +138,11 @@ const app = (state = { selection: new Set(), effectivenesses: [] }, action) => {
       return {
         selection: nextSelection,
         effectivenesses: calcEffectivenesses(nextSelection)
+      }
+    case RESET_POKE_TYPE:
+      return {
+        selection: new Set(),
+        effectivenesses: []
       }
     default:
       return state
