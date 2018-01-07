@@ -62,4 +62,5 @@ typings/
 
 .vscode
 
-lib/
+/lib/
+/dist/
