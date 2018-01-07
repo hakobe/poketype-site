@@ -121,7 +121,7 @@ const SelectModeButton = connect(mapStateToPropsSM, mapDispatchToPropsSM)(
     })
     return (
       <div className="poke-mode-select">
-        <div className="msg">選択したタイプで...</div>
+        <div className="msg">選択したタイプで</div>
         <button className={deffenceCn} onClick={() => onClick('defence')}>
           ぼうぎょ
         </button>
@@ -142,8 +142,8 @@ const PokemonEffectivenessList = ({ effectivenesses }) => {
     })
     return (
       <li className={cn} key={ef.skillType + '-' + ef.value}>
-        <div className="poke-effectiveness-type">{ef.skillType}</div>
         <div className="poke-effectiveness-value">x {ef.value}</div>
+        <div className="poke-effectiveness-type">{ef.skillType}</div>
       </li>
     )
   })

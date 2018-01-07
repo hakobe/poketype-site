@@ -1,3 +1,6 @@
+body {
+  font-family: sans-serif;
+}
 .poke-type-wrapper {
   display: flex;
   flex-direction: column;
@@ -7,7 +10,7 @@
 
 h1 {
   color: #666;
-  font-size: 1rem;
+  font-size: 1em;
   width: 320px;
   margin:0;
   padding: 0;
@@ -67,9 +70,6 @@ $values: (
   border-radius: 4px;
   font-weight: bolder;
 
-  &.disabled {
-    filter: brightness(0.7);
-  }
 
   @each $type, $color in $types {
     &.#{$type} {
@@ -78,10 +78,14 @@ $values: (
       border: 1px solid $color;
       border-bottom: 3px solid $color;
       &.selected {
-        color: white;
         background-color: darken($color, 5%);
         border: 1px solid darken($color, 15%);
         border-top: 3px solid darken($color, 15%);
+      }
+      &.disabled {
+        background-color: rgba($color, 0.3);
+        border: 1px solid rgba($color, 0.4);
+        border-bottom: 3px solid rgba($color, 0.4);
       }
     }
   }
@@ -103,12 +107,13 @@ $values: (
   margin-top: 3px;
 
   .msg {
-    margin-top: 3px;
+    font-size: 0.9em;
+    margin-top: 4px;
     margin-right: 5px;
   }
 
   button {
-    font-size: 1em;
+    font-size: 0.8em;
     margin-right: 1px;
     background-color: #eee;
     border: 1px solid #ccc;
@@ -129,7 +134,7 @@ $values: (
 }
 
 .poke-type-result {
-  height: 42px;
+  height: 28px;
   display: flex;
   flex-direction: row;
   align-items: stretch;
@@ -137,10 +142,10 @@ $values: (
 
   .poke-effectiveness-value {
     color: white;
-    font-size: 21px;
-    width: 100px;
+    font-size: 15px;
+    width: 80px;
     padding-left: 10px;
-    padding-top: 6px;
+    padding-top: 3px;
   }
   @each $value, $color in $values {
     &.val#{$value} .poke-effectiveness-value {
@@ -151,10 +156,10 @@ $values: (
   .poke-effectiveness-type {
     flex-grow: 1;
     background-color: #eee;
-    font-size: 21px;
+    font-size: 18px;
     font-weight: bolder;
-    padding-left: 10px;
-    padding-top: 6px;
+    padding-left: 8px;
+    padding-top: 2px;
   }
   @each $type, $color in $types {
     &.#{$type} .poke-effectiveness-type {
