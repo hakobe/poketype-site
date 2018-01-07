@@ -23,11 +23,10 @@ const resetPokeType = () => {
 
 // components
 const PokeTypeButton = ({ selection, typ, onSelect }) => {
-  const className = selection.has(typ) ? 'selected' : ''
   return (
-    <div className={className} onClick={() => onSelect()}>
+    <button disabled={selection.has(typ)} onClick={() => onSelect()}>
       {typ}
-    </div>
+    </button>
   )
 }
 
@@ -64,13 +63,11 @@ const ResetButton = connect(null, mapDispatchToPropsRB)(({ onClick }) => (
 
 const PokeTypeButtons = () => {
   const buttons = poketype.TypesList.map(typ => (
-    <SelectablePokeTypeButton key={typ} typ={typ} />
+    <li key={typ}>
+      <SelectablePokeTypeButton typ={typ} />
+    </li>
   ))
-  return (
-    <div>
-      {buttons} <ResetButton />
-    </div>
-  )
+  return <ul>{buttons}</ul>
 }
 
 const SelectablePokeTypeButtons = connect()(PokeTypeButtons)
@@ -99,6 +96,19 @@ const mapStateToPropsPEL = state => {
 const FilteredPokemonEffectivenessList = connect(mapStateToPropsPEL)(
   PokemonEffectivenessList
 )
+
+const mapStateToPropsS = state => {
+  return {
+    selection: state.selection
+  }
+}
+
+const Selection = connect(mapStateToPropsS)(({ selection }) => {
+  const sels = [...selection].map(typ => {
+    return <li key={typ}>{typ}</li>
+  })
+  return <ul>{sels}</ul>
+})
 
 // reducer
 const getNextSelection = (current, typ) => {
@@ -157,6 +167,8 @@ const App = () => {
     <Provider store={store}>
       <div>
         <SelectablePokeTypeButtons />
+        <Selection />
+        <ResetButton />
         <FilteredPokemonEffectivenessList />
       </div>
     </Provider>
