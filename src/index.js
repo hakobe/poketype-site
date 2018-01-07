@@ -4,6 +4,8 @@ import poketype from 'pokemon-types'
 import { connect, Provider } from 'react-redux'
 import { createStore } from 'redux'
 
+import './style.scss'
+
 // action
 const SELECT_POKE_TYPE = 'SELECT_POKE_TYPE'
 const RESET_POKE_TYPE = 'RESET_POKE_TYPE'
