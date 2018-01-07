@@ -88,6 +88,29 @@ $values: (
   height: 32px;
 }
 
+.poke-mode-select {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+
+  .msg {
+    margin-top: 3px;
+    margin-right: 5px;
+  }
+
+  button {
+    font-size: 1em;
+    margin-right: 1px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    &.active {
+      font-weight: bolder;
+      border: 3px solid #aaa;
+    }
+  }
+}
+
 .poke-type-results {
   width: 320px;
   list-style: none;

@@ -1,5 +1,5 @@
 {
-  "plugins": [],
+  "plugins": ["transform-object-rest-spread"],
   "env": {
     "development": {
       "presets": ["flow", "react", ["env", { "targets": { "chrome": 63 } }]]
