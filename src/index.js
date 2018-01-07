@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import poketype from 'pokemon-types'
 import { connect, Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { Button } from 'rmwc/Button'
 
+import 'material-components-web/dist/material-components-web.css'
 import './style.scss'
 
 // action
@@ -24,17 +26,17 @@ const resetPokeType = () => {
 }
 
 // components
-const PokeTypeButton = ({ selection, typ, onSelect }) => {
+const PokeTypeButton = ({ disabled, typ, onSelect }) => {
   return (
-    <button disabled={selection.has(typ)} onClick={() => onSelect()}>
+    <Button disabled={disabled(typ)} onClick={() => onSelect()}>
       {typ}
-    </button>
+    </Button>
   )
 }
 
 const mapStateToPropsPTB = state => {
   return {
-    selection: state.selection
+    disabled: typ => state.selection.has(typ) || state.selection.size === 2
   }
 }
 

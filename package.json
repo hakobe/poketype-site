@@ -55,10 +55,12 @@
   },
   "dependencies": {
     "css-loader": "^0.28.8",
+    "material-components-web": "^0.27.0",
     "pokemon-types": "https://github.com/hakobe/pokemon-types",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "rmwc": "^0.0.1-rc13"
   }
 }
