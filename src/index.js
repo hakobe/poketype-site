@@ -257,6 +257,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div className="poke-type-wrapper">
+        <h1>Poketype</h1>
         <SelectModeButton />
         <SelectablePokeTypeButtons />
         <ResetButton />
