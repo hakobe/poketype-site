@@ -195,7 +195,7 @@ const mapStateToPropsPEL = state => {
   }
 }
 
-const FilteredPokemonEffectivenessList = connect(mapStateToPropsPEL)(
+const CalculatedPokemonEffectivenessList = connect(mapStateToPropsPEL)(
   PokemonEffectivenessList
 )
 
@@ -260,7 +260,7 @@ const App = () => {
         <SelectModeButton />
         <SelectablePokeTypeButtons />
         <ResetButton />
-        <FilteredPokemonEffectivenessList />
+        <CalculatedPokemonEffectivenessList />
       </div>
     </Provider>
   )
