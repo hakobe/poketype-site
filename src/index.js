@@ -110,10 +110,7 @@ const mapDispatchToPropsRB = dispatch => {
   }
 }
 
-const ResetButton = connect(
-  null,
-  mapDispatchToPropsRB
-)(({ onClick }) => (
+const ResetButton = connect(null, mapDispatchToPropsRB)(({ onClick }) => (
   <button className="poke-type-reset" onClick={onClick}>
     リセット
   </button>
@@ -133,30 +130,29 @@ const mapDispatchToPropsSM = dispatch => {
   }
 }
 
-const SelectModeButton = connect(
-  mapStateToPropsSM,
-  mapDispatchToPropsSM
-)(({ mode, onClick }) => {
-  const deffenceCn = classNames({
-    defence: true,
-    active: mode === 'defence'
-  })
-  const offenceCn = classNames({
-    offence: true,
-    active: mode === 'offence'
-  })
-  return (
-    <div className="poke-mode-select">
-      <div className="msg">選択したタイプで</div>
-      <button className={deffenceCn} onClick={() => onClick('defence')}>
-        ぼうぎょ
-      </button>
-      <button className={offenceCn} onClick={() => onClick('offence')}>
-        こうげき
-      </button>
-    </div>
-  )
-})
+const SelectModeButton = connect(mapStateToPropsSM, mapDispatchToPropsSM)(
+  ({ mode, onClick }) => {
+    const deffenceCn = classNames({
+      defence: true,
+      active: mode === 'defence'
+    })
+    const offenceCn = classNames({
+      offence: true,
+      active: mode === 'offence'
+    })
+    return (
+      <div className="poke-mode-select">
+        <div className="msg">えらんだタイプで</div>
+        <button className={deffenceCn} onClick={() => onClick('defence')}>
+          ぼうぎょ
+        </button>
+        <button className={offenceCn} onClick={() => onClick('offence')}>
+          こうげき
+        </button>
+      </div>
+    )
+  }
+)
 
 const PokemonEffectivenessList = ({ effectivenesses }) => {
   const elems = effectivenesses.map(ef => {
