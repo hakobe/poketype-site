@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom'
 import poketype from 'pokemon-types'
 import { connect, Provider } from 'react-redux'
 import { createStore } from 'redux'
-import { Button } from 'rmwc/Button'
+import classNames from 'classnames'
 
-import 'material-components-web/dist/material-components-web.css'
 import './style.scss'
 
 // action
@@ -26,17 +25,29 @@ const resetPokeType = () => {
 }
 
 // components
-const PokeTypeButton = ({ disabled, typ, onSelect }) => {
+const PokeTypeButton = ({ disabled, selected, typ, onSelect }) => {
+  const wrapperCn = classNames({
+    'poke-type-button': true,
+    [typ]: true,
+    selected: selected(typ),
+    disabled: disabled(typ)
+  })
+
   return (
-    <Button disabled={disabled(typ)} onClick={() => onSelect()}>
+    <button
+      className={wrapperCn}
+      disabled={disabled(typ)}
+      onClick={() => onSelect()}
+    >
       {typ}
-    </Button>
+    </button>
   )
 }
 
 const mapStateToPropsPTB = state => {
   return {
-    disabled: typ => state.selection.has(typ) || state.selection.size === 2
+    disabled: typ => !state.selection.has(typ) && state.selection.size === 2,
+    selected: typ => state.selection.has(typ)
   }
 }
 
@@ -62,33 +73,35 @@ const mapDispatchToPropsRB = dispatch => {
 }
 
 const ResetButton = connect(null, mapDispatchToPropsRB)(({ onClick }) => (
-  <button onClick={onClick}>Reset</button>
+  <button className="poke-type-reset" onClick={onClick}>
+    リセット
+  </button>
 ))
 
 const PokeTypeButtons = () => {
   const buttons = poketype.TypesList.map(typ => (
-    <li key={typ}>
-      <SelectablePokeTypeButton typ={typ} />
-    </li>
+    <SelectablePokeTypeButton key={typ} typ={typ} />
   ))
-  return <ul>{buttons}</ul>
+  return <div className="poke-type-buttons">{buttons}</div>
 }
 
 const SelectablePokeTypeButtons = connect()(PokeTypeButtons)
 
-const PokemonEffectivness = ({ effectiveness }) => {
-  return (
-    <li key={effectiveness.skillType + '-' + effectiveness.value}>
-      {effectiveness.skillType} x{effectiveness.value}
-    </li>
-  )
-}
-
 const PokemonEffectivenessList = ({ effectivenesses }) => {
-  const elems = effectivenesses.map(ef =>
-    PokemonEffectivness({ effectiveness: ef })
-  )
-  return <ul>{elems}</ul>
+  const elems = effectivenesses.map(ef => {
+    const cn = classNames({
+      'poke-type-result': true,
+      [ef.skillType]: true,
+      ['val' + ef.value.toString().replace('.', '')]: true
+    })
+    return (
+      <li className={cn} key={ef.skillType + '-' + ef.value}>
+        <div className="poke-effectiveness-type">{ef.skillType}</div>
+        <div className="poke-effectiveness-value">x {ef.value}</div>
+      </li>
+    )
+  })
+  return <ul className="poke-type-results">{elems}</ul>
 }
 
 const mapStateToPropsPEL = state => {
@@ -169,9 +182,8 @@ const store = createStore(app)
 const App = () => {
   return (
     <Provider store={store}>
-      <div>
+      <div className="poke-type-wrapper">
         <SelectablePokeTypeButtons />
-        <Selection />
         <ResetButton />
         <FilteredPokemonEffectivenessList />
       </div>

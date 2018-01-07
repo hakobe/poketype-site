@@ -1,0 +1,133 @@
+
+.poke-type-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+$types: (
+  ノーマル: #AEAEAE,
+  ほのお: #FDA76C,
+  みず: #68C6F5,
+  でんき: #E6D22E,
+  くさ: #9BC12A,
+  こおり: #67E9F4,
+  かくとう: #EC6A6C,
+  どく: #AA7CC8,
+  じめん: #C7A74A,
+  ひこう: #67A8EE,
+  エスパー: #E983F2,
+  むし: #56C960,
+  いわ: #F9C63D,
+  ゴースト: #7570B2,
+  ドラゴン: #FD885F,
+  あく: #6983D1,
+  はがね: #818AA3,
+  フェアリー: #FA799A,
+);
+
+$more: #FC6769;
+$less: #69B4FC;
+
+$values: (
+  '0': #aaaaaa,
+  '025': #A18BC3,
+  '05': #69B4FC,
+  '2' : #FDA26F,
+  '4' : #FC6769,
+);
+
+.poke-type-button {
+  font-size: 0.8em;
+  border: 0;
+  color: white;
+  background-color: blue;
+  width: 100px;
+  height: 40px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 3px;
+  border-radius: 4px;
+  font-weight: bolder;
+
+  &.disabled {
+    filter: brightness(0.7);
+  }
+
+  @each $type, $color in $types {
+    &.#{$type} {
+      background-color: lighten($color, 5%);
+      color: white;
+      border: 1px solid $color;
+      border-bottom: 3px solid $color;
+      &.selected {
+        color: white;
+        background-color: darken($color, 5%);
+        border: 1px solid darken($color, 15%);
+        border-top: 3px solid darken($color, 15%);
+      }
+    }
+  }
+}
+
+.poke-type-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.poke-type-reset {
+  margin-top: 10px;
+  background-color: #eee;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+
+  width: 180px;
+  height: 32px;
+}
+
+.poke-type-results {
+  width: 320px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.poke-type-result {
+  height: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-bottom: 1px solid #ccc;
+
+  .poke-effectiveness-value {
+    color: white;
+    font-size: 21px;
+    width: 100px;
+    padding-left: 10px;
+    padding-top: 6px;
+  }
+  @each $value, $color in $values {
+    &.val#{$value} .poke-effectiveness-value {
+      background-color: $color;
+    }
+  }
+
+  .poke-effectiveness-type {
+    flex-grow: 1;
+    background-color: #eee;
+    font-size: 21px;
+    font-weight: bolder;
+    padding-left: 10px;
+    padding-top: 6px;
+  }
+  @each $type, $color in $types {
+    &.#{$type} .poke-effectiveness-type {
+      color: $color;
+    }
+  }
+}
+

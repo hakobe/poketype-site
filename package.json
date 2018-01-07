@@ -54,6 +54,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "css-loader": "^0.28.8",
     "material-components-web": "^0.27.0",
     "pokemon-types": "https://github.com/hakobe/pokemon-types",
