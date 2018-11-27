@@ -2,15 +2,11 @@ parser: 'babel-eslint'
 plugins:
   - react
   - prettier
-  - flowtype
   - standard
 extends:
   - standard
-  - plugin:flowtype/recommended
   - plugin:import/errors
   - prettier
-  - prettier/flowtype
-  - prettier/react
 rules:
   prettier/prettier:
     - 2
@@ -28,4 +24,3 @@ rules:
       varsIgnorePattern: ^_
   react/jsx-uses-vars: 2
   react/jsx-uses-react: 2
-

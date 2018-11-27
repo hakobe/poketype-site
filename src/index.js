@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import poketype from 'pokemon-types'
+import * as poketype from 'poketype'
 import { connect, Provider } from 'react-redux'
 import { createStore } from 'redux'
 import classNames from 'classnames'
@@ -72,8 +72,29 @@ const SelectablePokeTypeButton = connect(
   mapDispatchToPropsPTB
 )(PokeTypeButton)
 
+const TypeNameToValue = {
+  ノーマル: poketype.ノーマル,
+  ほのお: poketype.ほのお,
+  みず: poketype.みず,
+  でんき: poketype.でんき,
+  くさ: poketype.くさ,
+  こおり: poketype.こおり,
+  かくとう: poketype.かくとう,
+  どく: poketype.どく,
+  じめん: poketype.じめん,
+  ひこう: poketype.ひこう,
+  エスパー: poketype.エスパー,
+  むし: poketype.むし,
+  いわ: poketype.いわ,
+  ゴースト: poketype.ゴースト,
+  ドラゴン: poketype.ドラゴン,
+  あく: poketype.あく,
+  はがね: poketype.はがね,
+  フェアリー: poketype.フェアリー
+}
+
 const PokeTypeButtons = () => {
-  const buttons = poketype.TypesList.map(typ => (
+  const buttons = Object.keys(TypeNameToValue).map(typ => (
     <SelectablePokeTypeButton key={typ} typ={typ} />
   ))
   return <div className="poke-type-buttons">{buttons}</div>
@@ -151,9 +172,9 @@ const PokemonEffectivenessList = ({ effectivenesses }) => {
 }
 
 const calcEffectivenessesAsDefence = selection => {
-  const target = poketype.createPokemon(...selection.values())
-  return poketype.TypesList.map(typ => {
-    const ef = poketype.calcEffectiveness(typ, target)
+  const target = new poketype.Pokemon(...Array.from(selection).map(v => TypeNameToValue[v]))
+  return Object.keys(TypeNameToValue).map(typ => {
+    const ef = poketype.calcEffectiveness(TypeNameToValue[typ], target)
     return {
       message: ef.message,
       value: ef.value,
@@ -167,9 +188,9 @@ const calcEffectivenessesAsOffence = selection => {
     return []
   }
 
-  return poketype.TypesList.map(typ => {
-    const target = poketype.createPokemon(typ)
-    const ef = poketype.calcEffectiveness([...selection][0], target)
+  return Object.keys(TypeNameToValue).map(typ => {
+    const target = new poketype.Pokemon(TypeNameToValue[typ])
+    const ef = poketype.calcEffectiveness(TypeNameToValue[[...selection][0]], target)
     return {
       message: ef.message,
       value: ef.value,

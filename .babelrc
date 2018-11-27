@@ -2,14 +2,13 @@
   "plugins": ["transform-object-rest-spread"],
   "env": {
     "development": {
-      "presets": ["flow", "react", ["env", { "targets": { "chrome": 63 } }]]
+      "presets": ["react", ["env", { "targets": { "chrome": 63 } }]]
     },
     "test": {
-      "presets": ["flow", "react", ["env", { "targets": { "node": "8.9" } }]]
+      "presets": ["react", ["env", { "targets": { "node": "8.9" } }]]
     },
     "production": {
       "presets": [
-        "flow",
         "react",
         [
           "env",
